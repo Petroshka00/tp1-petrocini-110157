@@ -19,7 +19,7 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 
 size_t hospital_cantidad_pokemones(hospital_t *hospital)
 {
-	return 0;
+	return (hospital->cantidad_pokemon);
 }
 
 size_t hospital_a_cada_pokemon(hospital_t *hospital,
