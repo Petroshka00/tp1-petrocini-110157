@@ -43,4 +43,5 @@ pokemon_t *hospital_obtener_pokemon(hospital_t *hospital, size_t prioridad)
 
 void hospital_destruir(hospital_t *hospital)
 {
+	free(hospital);
 }
