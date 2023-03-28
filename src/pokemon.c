@@ -24,7 +24,15 @@ pokemon_t *pokemon_crear_desde_string(const char *string)
 
 pokemon_t *pokemon_copiar(pokemon_t *poke)
 {
-	return NULL;
+	if(poke == NULL){
+		return NULL;
+	}
+	pokemon_t *copia_pokemon = malloc(sizeof(pokemon_t));
+	copia_pokemon->id = poke->id;
+	strcpy(copia_pokemon->nombre, poke->nombre);
+	copia_pokemon->salud = poke->salud;
+	strcpy(copia_pokemon->nombre_entrenador, poke->nombre_entrenador);
+	return copia_pokemon;
 }
 
 bool comparar_var_size(size_t var1, size_t var2)
