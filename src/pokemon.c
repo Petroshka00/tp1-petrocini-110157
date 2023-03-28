@@ -74,22 +74,38 @@ bool pokemon_son_iguales(pokemon_t *pokemon1, pokemon_t *pokemon2)
 
 char *pokemon_nombre(pokemon_t *pokemon)
 {
-	return 0;
+	if(pokemon == NULL){
+		return NULL;
+	} else {
+		return pokemon->nombre;
+	}
 }
 
 char *pokemon_entrenador(pokemon_t *pokemon)
 {
-	return 0;
+	if(pokemon == NULL){
+		return NULL;
+	} else {
+		return pokemon->nombre_entrenador;
+	}
 }
 
 size_t pokemon_salud(pokemon_t *pokemon)
 {
-	return 0;
+	if(pokemon == NULL){
+		return 0;
+	} else {
+		return pokemon->salud;
+	}
 }
 
 size_t pokemon_id(pokemon_t *pokemon)
 {
-	return 0;
+	if(pokemon == NULL){
+		return 0;
+	} else {
+		return pokemon->id;
+	}
 }
 
 void pokemon_destruir(pokemon_t *pkm)
