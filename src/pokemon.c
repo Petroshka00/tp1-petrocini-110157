@@ -6,13 +6,14 @@
 #define LECTURA "%zu,%[^,],%zu,%[^,]"
 pokemon_t *pokemon_crear_desde_string(const char *string)
 {
-	if (string == NULL){
+	if (string == NULL) {
 		return NULL;
 	} else {
 		pokemon_t *pokemon_nuevo = malloc(sizeof(pokemon_t));
 		int leidos = sscanf(string, LECTURA, &pokemon_nuevo->id,
-					pokemon_nuevo->nombre, &pokemon_nuevo->salud,
-					pokemon_nuevo->nombre_entrenador);
+				    pokemon_nuevo->nombre,
+				    &pokemon_nuevo->salud,
+				    pokemon_nuevo->nombre_entrenador);
 		if (leidos == 4) {
 			return pokemon_nuevo;
 		} else {
