@@ -16,17 +16,18 @@ struct _hospital_pkm_t {
 
 hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 {
-	// FILE* archivo = fopen(nombre_archivo, "r");
-	// int leidos = 0;
-	// hospital_t *hospital_nuevo = malloc(sizeof(hospital_t));
-	// if(archivo == NULL){
-	// 	fclose(archivo);
-	// 	return NULL;
-	// } else {
-	// 	do{
-	// 	leidos = fscanf(archivo, LECTURA, hospital_nuevo->pokemones)
-	// 	} while (leidos == 4);
-	// }
+	FILE *archivo = fopen(nombre_archivo, "r");
+	if (archivo == NULL) {
+		fclose(archivo);
+		return NULL;
+	}
+	int leidos = 0;
+	hospital_t *hospital_nuevo = malloc(sizeof(hospital_t));
+	hospital_nuevo->cantidad_pokemon = 0;
+	do {
+		leidos = fscanf(archivo, LECTURA, hospital_nuevo->pokemones[hospital_nuevo->cantidad_pokemon]);
+		hospital_nuevo->cantidad_pokemon += 1;
+	} while (leidos == 4);
 	return NULL;
 }
 
@@ -51,7 +52,10 @@ int hospital_aceptar_emergencias(hospital_t *hospital,
 
 pokemon_t *hospital_obtener_pokemon(hospital_t *hospital, size_t prioridad)
 {
-	return NULL;
+	if(hospital == NULL){
+		return NULL;
+	}
+	return (hospital->pokemones[prioridad]);
 }
 
 void hospital_destruir(hospital_t *hospital)
