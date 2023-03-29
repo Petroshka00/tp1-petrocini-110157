@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define LECTURA "%zu,%[^,],%zu,%[^,]"
+
 struct _hospital_pkm_t {
 	pokemon_t **pokemones;
 	size_t cantidad_pokemon;
@@ -14,6 +16,17 @@ struct _hospital_pkm_t {
 
 hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 {
+	// FILE* archivo = fopen(nombre_archivo, "r");
+	// int leidos = 0;
+	// hospital_t *hospital_nuevo = malloc(sizeof(hospital_t));
+	// if(archivo == NULL){
+	// 	fclose(archivo);
+	// 	return NULL;
+	// } else {
+	// 	do{
+	// 	leidos = fscanf(archivo, LECTURA, hospital_nuevo->pokemones)
+	// 	} while (leidos == 4);
+	// }
 	return NULL;
 }
 

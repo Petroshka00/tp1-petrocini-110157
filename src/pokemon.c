@@ -6,14 +6,18 @@
 #define LECTURA "%zu,%[^,],%zu,%[^,]"
 pokemon_t *pokemon_crear_desde_string(const char *string)
 {
-	pokemon_t *pokemon_nuevo = malloc(sizeof(pokemon_t));
-	int leidos = sscanf(string, LECTURA, &pokemon_nuevo->id,
-			    pokemon_nuevo->nombre, &pokemon_nuevo->salud,
-			    pokemon_nuevo->nombre_entrenador);
-	if (leidos == 4) {
-		return pokemon_nuevo;
-	} else {
+	if (string == NULL){
 		return NULL;
+	} else {
+		pokemon_t *pokemon_nuevo = malloc(sizeof(pokemon_t));
+		int leidos = sscanf(string, LECTURA, &pokemon_nuevo->id,
+					pokemon_nuevo->nombre, &pokemon_nuevo->salud,
+					pokemon_nuevo->nombre_entrenador);
+		if (leidos == 4) {
+			return pokemon_nuevo;
+		} else {
+			return NULL;
+		}
 	}
 }
 
@@ -23,10 +27,8 @@ pokemon_t *pokemon_copiar(pokemon_t *poke)
 		return NULL;
 	}
 	pokemon_t *copia_pokemon = malloc(sizeof(pokemon_t));
-	copia_pokemon->id = poke->id;
-	strcpy(copia_pokemon->nombre, poke->nombre);
-	copia_pokemon->salud = poke->salud;
-	strcpy(copia_pokemon->nombre_entrenador, poke->nombre_entrenador);
+	*copia_pokemon = *poke;
+
 	return copia_pokemon;
 }
 
