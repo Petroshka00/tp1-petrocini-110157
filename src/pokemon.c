@@ -3,14 +3,14 @@
 #include <stdio.h>
 #include "pokemon_privado.h"
 
-#define LECTURA "%zu,%[^,],%zu,%[^,]"
+#define LECTURA_STR "%zu,%[^,],%zu,%[^,]"
 pokemon_t *pokemon_crear_desde_string(const char *string)
 {
 	if (string == NULL) {
 		return NULL;
 	} else {
 		pokemon_t *pokemon_nuevo = malloc(sizeof(pokemon_t));
-		int leidos = sscanf(string, LECTURA, &pokemon_nuevo->id,
+		int leidos = sscanf(string, LECTURA_STR, &pokemon_nuevo->id,
 				    pokemon_nuevo->nombre,
 				    &pokemon_nuevo->salud,
 				    pokemon_nuevo->nombre_entrenador);
