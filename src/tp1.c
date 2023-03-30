@@ -42,32 +42,36 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 		return NULL;
 	}
 	hospital_t *hospital_nuevo = calloc(1, sizeof(hospital_t));
-	hospital_nuevo->pokemones = malloc(sizeof(hospital_t));
+	hospital_nuevo->pokemones = malloc(sizeof(pokemon_t *));
 	if (hospital_nuevo == NULL) {
+		fclose(archivo);
 		return NULL;
 	}
 
 	char *string_para_crear_pkm = malloc(40 * sizeof(char));
-	if (string_para_crear_pkm == NULL) {
-		return NULL;
-	}
 	int leidos = fscanf(archivo, LECTURA_ARC, string_para_crear_pkm);
 
 	if (leidos != 1) {
+		fclose(archivo);
 		return NULL;
 	}
 
 	while (leidos == 1) {
 		if (string_para_crear_pkm == NULL) {
+			fclose(archivo);
 			return NULL;
 		}
 		hospital_nuevo->pokemones[hospital_nuevo->cantidad_pokemon] =
 			pokemon_crear_desde_string(string_para_crear_pkm);
 		hospital_nuevo->cantidad_pokemon += 1;
 		hospital_nuevo->cantidad_entrenadores += 1;
+		hospital_nuevo->pokemones =
+			realloc(hospital_nuevo->pokemones,
+				sizeof(pokemon_t *) *
+					(hospital_nuevo->cantidad_pokemon + 1));
 		leidos = fscanf(archivo, LECTURA_ARC, string_para_crear_pkm);
 	}
-	hospital_ordenar(hospital_nuevo);
+	// hospital_ordenar(hospital_nuevo);
 	fclose(archivo);
 	return hospital_nuevo;
 }
@@ -81,20 +85,37 @@ size_t hospital_a_cada_pokemon(hospital_t *hospital,
 			       bool (*funcion)(pokemon_t *p, void *aux),
 			       void *aux)
 {
+	if (hospital == NULL) {
+		return 0;
+	}
+	if (funcion == NULL) {
+		return 0;
+	}
+	if (aux == NULL) {
+		return 0;
+	}
 	hospital_ordenar(hospital);
-	int i = 0;
+	size_t i = 0;
 	do {
 		funcion(hospital->pokemones[i], aux);
 		i++;
 	} while (funcion(hospital->pokemones[i], aux));
-	return (size_t)i;
+	return i;
 }
 
 int hospital_aceptar_emergencias(hospital_t *hospital,
 				 pokemon_t **pokemones_ambulancia,
 				 size_t cant_pokes_ambulancia)
 {
-	return ERROR;
+	for (size_t i = 0; i < cant_pokes_ambulancia; i++) {
+		hospital->pokemones = realloc(
+			hospital->pokemones,
+			sizeof(pokemon_t *) * (hospital->cantidad_pokemon + 1));
+		hospital->pokemones[hospital->cantidad_pokemon] =
+			pokemones_ambulancia[i];
+		hospital->cantidad_pokemon += 1;
+	}
+	return 0;
 }
 
 pokemon_t *hospital_obtener_pokemon(hospital_t *hospital, size_t prioridad)
