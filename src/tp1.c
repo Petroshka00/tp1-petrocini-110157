@@ -14,7 +14,7 @@ struct _hospital_pkm_t {
 	size_t cantidad_entrenadores;
 };
 
-hospital_t *hospital_ordenar(hospital_t *hospital_a_ordenar){
+void hospital_ordenar(hospital_t *hospital_a_ordenar){
 	for(size_t i = 0; i < hospital_a_ordenar->cantidad_pokemon-1; i++){
 		for(size_t j = 0; j < hospital_a_ordenar->cantidad_pokemon - i - 1; j++){
 			if(pokemon_salud(hospital_a_ordenar->pokemones[j+1]) < pokemon_salud(hospital_a_ordenar->pokemones[j])){
@@ -25,7 +25,6 @@ hospital_t *hospital_ordenar(hospital_t *hospital_a_ordenar){
 			}
 		}
 	}
-	return hospital_a_ordenar;
 }
 
 hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
@@ -38,7 +37,7 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 		return NULL;
 	}
 	hospital_t *hospital_nuevo = calloc(1, sizeof(hospital_t));
-	hospital_nuevo->pokemones = malloc(20);
+	hospital_nuevo->pokemones = malloc(sizeof(hospital_t));
 	if (hospital_nuevo == NULL) {
 		return NULL;
 	}
@@ -59,12 +58,10 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 		}
 		hospital_nuevo->pokemones[hospital_nuevo->cantidad_pokemon] = pokemon_crear_desde_string(string_para_crear_pkm);
 		hospital_nuevo->cantidad_pokemon += 1;
+		hospital_nuevo->cantidad_entrenadores += 1;
 		leidos = fscanf(archivo, LECTURA_ARC, string_para_crear_pkm);
 	}
-	
-
 	hospital_ordenar(hospital_nuevo);
-
 	fclose(archivo);
 	return hospital_nuevo;
 }
