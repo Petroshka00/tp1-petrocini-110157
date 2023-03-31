@@ -4,7 +4,7 @@
 
 # TP1
 
-## Repositorio de (Nombre Apellido) - (Padrón) - (Mail)
+## Repositorio de Tomas Petrocini - 110157 - petrocinitomas@gmail.com 
 
 - Para compilar:
 
