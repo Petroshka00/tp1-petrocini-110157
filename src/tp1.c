@@ -84,10 +84,7 @@ size_t hospital_a_cada_pokemon(hospital_t *hospital,
 			       bool (*funcion)(pokemon_t *p, void *aux),
 			       void *aux)
 {
-	if (hospital == NULL) {
-		return 0;
-	}
-	if (funcion == NULL) {
+	if (hospital == NULL || funcion == NULL) {
 		return 0;
 	}
 
@@ -105,12 +102,10 @@ int hospital_aceptar_emergencias(hospital_t *hospital,
 				 pokemon_t **pokemones_ambulancia,
 				 size_t cant_pokes_ambulancia)
 {
-	if (hospital == NULL) {
+	if (hospital == NULL || pokemones_ambulancia == NULL) {
 		return -1;
 	}
-	if (pokemones_ambulancia == NULL) {
-		return -1;
-	}
+	
 	for (size_t i = 0; i < cant_pokes_ambulancia; i++) {
 		hospital->pokemones = realloc(
 			hospital->pokemones,
