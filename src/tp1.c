@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define LECTURA_ARC "%s"
+#define LECTURA_ARC "%[^\n]\n"
 
 struct _hospital_pkm_t {
 	pokemon_t **pokemones;
