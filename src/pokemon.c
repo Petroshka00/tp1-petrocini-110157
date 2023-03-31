@@ -17,6 +17,7 @@ pokemon_t *pokemon_crear_desde_string(const char *string)
 		if (leidos == 4) {
 			return pokemon_nuevo;
 		} else {
+			free(pokemon_nuevo);
 			return NULL;
 		}
 	}
