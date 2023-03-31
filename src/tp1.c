@@ -43,11 +43,6 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 	}
 	hospital_t *hospital_nuevo = calloc(1, sizeof(hospital_t));
 	hospital_nuevo->pokemones = malloc(sizeof(pokemon_t *));
-	if (hospital_nuevo == NULL) {
-		fclose(archivo);
-		return NULL;
-	}
-
 	char *string_para_crear_pkm = malloc(40 * sizeof(char));
 	int leidos = fscanf(archivo, LECTURA_ARC, string_para_crear_pkm);
 
@@ -59,6 +54,7 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 	while (leidos == 1) {
 		if (string_para_crear_pkm == NULL) {
 			fclose(archivo);
+			free(string_para_crear_pkm);
 			return NULL;
 		}
 		hospital_nuevo->pokemones[hospital_nuevo->cantidad_pokemon] =
@@ -106,6 +102,12 @@ int hospital_aceptar_emergencias(hospital_t *hospital,
 				 pokemon_t **pokemones_ambulancia,
 				 size_t cant_pokes_ambulancia)
 {
+	if(hospital == NULL){
+		return -1;
+	}
+	if(pokemones_ambulancia == NULL){
+		return -1;
+	}
 	for (size_t i = 0; i < cant_pokes_ambulancia; i++) {
 		hospital->pokemones = realloc(
 			hospital->pokemones,
@@ -132,5 +134,6 @@ void hospital_destruir(hospital_t *hospital)
 	for(int i = 0; i < hospital->cantidad_pokemon; i++){
 		free(hospital->pokemones[i]);
 	}
+	free(hospital->pokemones);
 	free(hospital);
 }
