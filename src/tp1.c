@@ -42,7 +42,7 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 	if (archivo == NULL) {
 		return NULL;
 	}
-	
+
 	hospital_t *hospital_nuevo = calloc(1, sizeof(hospital_t));
 	hospital_nuevo->pokemones = malloc(sizeof(pokemon_t *));
 	char *string_para_crear_pkm = malloc(40 * sizeof(char));
