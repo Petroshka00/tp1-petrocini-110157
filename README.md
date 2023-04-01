@@ -41,7 +41,7 @@ Este es un ejemplo de como se guarda un hospital en memoria
 
 Y esto es como se libera la memoria de un hospital
 <div align="center">
-<img width="70%" src="img/liberar:memoria.jpg">
+<img width="70%" src="img/liberar_memoria.jpg">
 </div>
 
 **
