@@ -36,7 +36,7 @@ Ambos archivos .c tambien cuentan con funciones que devuelven variables dentro d
 
 Este es un ejemplo de como se guarda un hospital en memoria
 <div align="center">
-<img width="70%" src="img/Ejem-memoria.drawio.svg">
+<img width="70%" src="img/ejem-memoria.svg">
 </div>
 
 **
