@@ -39,6 +39,11 @@ Este es un ejemplo de como se guarda un hospital en memoria
 <img width="70%" src="img/memoria.jpg">
 </div>
 
+Y esto es como se libera la memoria de un hospital
+div align="center">
+<img width="70%" src="img/liberar:memoria.png">
+</div>
+
 **
 Explicación de cómo funcionan las estructuras desarrolladas en el TP y el funcionamiento general del mismo.
 
