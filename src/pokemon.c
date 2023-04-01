@@ -54,22 +54,24 @@ bool comparar_var_char(char *var1, char *var2)
 
 bool pokemon_son_iguales(pokemon_t *pokemon1, pokemon_t *pokemon2)
 {
-	int aux = 0;
-	if (comparar_var_size(pokemon1->id, pokemon2->id))
-		aux++;
-	if (comparar_var_size(pokemon1->salud, pokemon2->salud))
-		aux++;
-	if (comparar_var_char(pokemon1->nombre, pokemon2->nombre))
-		aux++;
-	if (comparar_var_char(pokemon1->nombre_entrenador,
-			      pokemon2->nombre_entrenador))
-		aux++;
+	return (comparar_var_size(pokemon1->id, pokemon2->id) && comparar_var_size(pokemon1->salud, pokemon2->salud) && strcmp(pokemon1->nombre, pokemon2->nombre) == 0 && strcmp(pokemon1->nombre_entrenador, pokemon2->nombre_entrenador) == 0);
 
-	if (aux == 4) {
-		return true;
-	} else {
-		return false;
-	}
+// 	int aux = 0;
+// 	if (comparar_var_size(pokemon1->id, pokemon2->id))
+// 		aux++;
+// 	if (comparar_var_size(pokemon1->salud, pokemon2->salud))
+// 		aux++;
+// 	if (comparar_var_char(pokemon1->nombre, pokemon2->nombre))
+// 		aux++;
+// 	if (comparar_var_char(pokemon1->nombre_entrenador,
+// 			      pokemon2->nombre_entrenador))
+// 		aux++;
+
+// 	if (aux == 4) {
+// 		return true;
+// 	} else {
+// 		return false;
+// 	}
 }
 
 char *pokemon_nombre(pokemon_t *pokemon)
