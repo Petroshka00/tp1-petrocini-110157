@@ -54,11 +54,6 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 	}
 
 	while (leidos == 1) {
-		if (string_para_crear_pkm == NULL) {
-			fclose(archivo);
-			hospital_destruir(hospital_nuevo);
-			return NULL;
-		}
 		hospital_nuevo->pokemones[hospital_nuevo->cantidad_pokemon] =
 			pokemon_crear_desde_string(string_para_crear_pkm);
 		hospital_nuevo->cantidad_pokemon += 1;
