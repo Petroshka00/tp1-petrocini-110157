@@ -10,6 +10,9 @@ pokemon_t *pokemon_crear_desde_string(const char *string)
 		return NULL;
 	} else {
 		pokemon_t *pokemon_nuevo = malloc(sizeof(pokemon_t));
+		if (pokemon_nuevo == NULL) {
+			return NULL;
+		}
 		int leidos = sscanf(string, LECTURA_STR, &pokemon_nuevo->id,
 				    pokemon_nuevo->nombre,
 				    &pokemon_nuevo->salud,
@@ -29,6 +32,9 @@ pokemon_t *pokemon_copiar(pokemon_t *poke)
 		return NULL;
 	}
 	pokemon_t *copia_pokemon = malloc(sizeof(pokemon_t));
+	if (copia_pokemon == NULL) {
+		return NULL;
+	}
 	*copia_pokemon = *poke;
 
 	return copia_pokemon;

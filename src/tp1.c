@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define ERROR -1
 #define LECTURA_ARC "%[^\n]\n"
 
 struct _hospital_pkm_t {
@@ -46,6 +47,10 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 	hospital_t *hospital_nuevo = calloc(1, sizeof(hospital_t));
 	hospital_nuevo->pokemones = malloc(sizeof(pokemon_t *));
 	char *string_para_crear_pkm = malloc(40 * sizeof(char));
+	if (hospital_nuevo->pokemones == NULL ||
+	    string_para_crear_pkm == NULL) {
+		return NULL;
+	}
 	int leidos = fscanf(archivo, LECTURA_ARC, string_para_crear_pkm);
 
 	if (leidos != 1) {
@@ -64,6 +69,9 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 			realloc(hospital_nuevo->pokemones,
 				sizeof(pokemon_t *) *
 					(hospital_nuevo->cantidad_pokemon + 1));
+		if (hospital_nuevo->pokemones == NULL) {
+			return NULL;
+		}
 		leidos = fscanf(archivo, LECTURA_ARC, string_para_crear_pkm);
 	}
 	hospital_ordenar(hospital_nuevo);
@@ -74,6 +82,9 @@ hospital_t *hospital_crear_desde_archivo(const char *nombre_archivo)
 
 size_t hospital_cantidad_pokemones(hospital_t *hospital)
 {
+	if (hospital == NULL) {
+		return NULL;
+	}
 	return (hospital->cantidad_pokemon);
 }
 
@@ -100,13 +111,16 @@ int hospital_aceptar_emergencias(hospital_t *hospital,
 				 size_t cant_pokes_ambulancia)
 {
 	if (hospital == NULL || pokemones_ambulancia == NULL) {
-		return -1;
+		return ERROR;
 	}
 
 	for (size_t i = 0; i < cant_pokes_ambulancia; i++) {
 		hospital->pokemones = realloc(
 			hospital->pokemones,
 			sizeof(pokemon_t *) * (hospital->cantidad_pokemon + 1));
+		if (hospital->pokemones == NULL) {
+			return ERROR;
+		}
 		hospital->pokemones[hospital->cantidad_pokemon] =
 			pokemones_ambulancia[i];
 		hospital->cantidad_pokemon += 1;
